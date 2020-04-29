@@ -1,0 +1,34 @@
+//Simulator
+
+IDistributor comp = new CompositeDistributor();
+comp.Add(new Distributor1( new Subscriber1()));
+comp.Add(new Distributor2(new Subscriber2()));
+comp.Add(new Distributor3(new Subscriber3()));
+
+Publisher obj = new Publisher(comp);
+obj.Invoke();
+-------------------------------------------
+class Publisher()
+{
+public: 
+IDistrobutor* dist;
+Publisher(IDistributor d){*dist=d;}
+void Invoke(){ dist->execute());
+}
+-------------------------------------------
+class CompositeDistributor{
+public:
+List<IDistrobutor> list;
+void execute(){
+//iterate through the list and call respective execute Methods
+}
+------------------------------------------
+class Distributor1{
+public:
+Subscriber1 sub;
+Distributor(Subscriber1 sub1){ sub=sub1);}
+void execute(){ sub->action1();}
+}
+-------------------------------------------
+
+
